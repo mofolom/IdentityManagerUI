@@ -1,3 +1,6 @@
+@using System.Collections.Generic;
+@using System.Linq;
+
 @{
     ViewData["Title"] = "Users Page";
 }
@@ -77,6 +80,12 @@
                         <label for="locked">Locked:</label>
                         <input name="locked" type="checkbox" class="checkbox" value="true" style="display:flex">
                         <input name="id" type="hidden" />
+                        @if (ViewBag.Roles.Values.Contains("User-TraditionalAuth"))
+                        {
+                            <hr />
+                            <label for="authority-area">Region:</label>
+                            <select id="authority-area" />
+                        }
                     </div>
                 </div>
                 <div id="roles" class="tab-pane">
@@ -214,7 +223,7 @@
                         }
                     }
                 ],
-                "createdRow": function(row, data) {
+                "createdRow": function (row, data) {
                     if (data.lockedOut)
                         $(row).addClass('table-danger');
                 }
